@@ -172,6 +172,7 @@ body {
   display: flex;
 }
 
+
 .show::before {
   content: "Show";
   font-size: 0.6em;
