@@ -187,6 +187,64 @@ body {
   content: "Hide";
 }
 ```
+## Javascript
+```
+function Strength(password) {
+    let i = 0;
+    if (password.length > 6) {
+      i++;
+    }
+    if (password.length >= 10) {
+      i++;
+    }
+  
+    if (/[A-Z]/.test(password)) {
+      i++;
+    }
+  
+    if (/[0-9]/.test(password)) {
+      i++;
+    }
+  
+    if (/[A-Za-z0-8]/.test(password)) {
+      i++;
+    }
+  
+    return i;
+  }
+  
+  let container = document.querySelector(".container");
+  document.addEventListener("keyup", function (e) {
+    let password = document.querySelector("#YourPassword").value;
+  
+    let strength = Strength(password);
+    if (strength <= 2) {
+      container.classList.add("weak");
+      container.classList.remove("moderate");
+      container.classList.remove("strong");
+    } else if (strength >= 2 && strength <= 4) {
+      container.classList.remove("weak");
+      container.classList.add("moderate");
+      container.classList.remove("strong");
+    } else {
+      container.classList.remove("weak");
+      container.classList.remove("moderate");
+      container.classList.add("strong");
+    }
+  });
+  
+  let password = document.querySelector("#YourPassword");
+  let show = document.querySelector(".show");
+  show.onclick = function () {
+    if (password.type === "password") {
+      password.setAttribute("type", "text");
+      show.classList.add("hide");
+    } else {
+      password.setAttribute("type", "password");
+      show.classList.remove("hide");
+    }
+  };
+```
 ## EXAMPLE OUTPUT 
 
 ![image](https://github.com/user-attachments/assets/8cf23de2-9fc0-4ced-ae8b-d335a3047ac9)
@@ -206,7 +264,7 @@ body {
 
 5. Responsive design with an intuitive user interface.
 
-Link to test your password : https://password-strength.vercel.app/
+## Link to test your password : https://password-strength.vercel.app/
 
 ## Result
 The Password Strength Testing project successfully demonstrates how cybersecurity tools can empower users to create more secure passwords. By analyzing password complexity, checking against data breaches, and offering personalized feedback, the tool promotes safe authentication practices and contributes to reducing risks associated with weak credentials.
