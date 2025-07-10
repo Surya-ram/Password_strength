@@ -12,6 +12,7 @@ The purpose of this project is to provide you with an easy-to-use tool to evalua
 - JavaScript
 
 ## HTML CODE 
+```
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,8 +39,9 @@ The purpose of this project is to provide you with an easy-to-use tool to evalua
 </body>
 
 </html>
-
+```
 ## CSS CODE 
+```
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 * {
   margin: 0;
@@ -184,7 +186,7 @@ body {
 .show.hide::before {
   content: "Hide";
 }
-
+```
 ## EXAMPLE OUTPUT 
 
 ![image](https://github.com/user-attachments/assets/8cf23de2-9fc0-4ced-ae8b-d335a3047ac9)
