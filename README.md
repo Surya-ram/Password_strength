@@ -1,4 +1,4 @@
-# Password Strength Testing 
+# Password Strength Testing Using Pyhton
 Password strength testing is the technique used to determine how difficult a password is to crack using automated tools or known attack strategies. It helps identify weak or commonly used passwords and encourages the use of strong, complex passwords that enhance system security.
 
 ## Project Purpose 📋
