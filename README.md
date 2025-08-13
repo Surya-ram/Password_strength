@@ -10,6 +10,97 @@ The purpose of this project is to provide you with an easy-to-use tool to evalua
 - HTML
 - CSS
 - JavaScript
+## python code
+```
+import re
+import requests
+
+# Dictionary of common weak passwords (You can extend this list)
+COMMON_PASSWORDS = [
+    "password", "123456", "123456789", "qwerty", "abc123", "111111",
+    "123123", "iloveyou", "admin", "welcome", "letmein", "monkey"
+]
+
+def check_password_strength(password):
+    score = 0
+    feedback = []
+
+    # Length check
+    if len(password) >= 12:
+        score += 2
+    elif len(password) >= 8:
+        score += 1
+    else:
+        feedback.append("Password is too short (minimum 8 characters recommended).")
+
+    # Uppercase
+    if re.search(r"[A-Z]", password):
+        score += 1
+    else:
+        feedback.append("Add at least one uppercase letter.")
+
+    # Lowercase
+    if re.search(r"[a-z]", password):
+        score += 1
+    else:
+        feedback.append("Add at least one lowercase letter.")
+
+    # Numbers
+    if re.search(r"[0-9]", password):
+        score += 1
+    else:
+        feedback.append("Add at least one digit.")
+
+    # Special characters
+    if re.search(r"[\W_]", password):
+        score += 1
+    else:
+        feedback.append("Add at least one special character (!@#$%^&* etc).")
+
+    # Dictionary word check
+    if password.lower() in COMMON_PASSWORDS:
+        feedback.append("Password is too common and easily guessable.")
+
+    # Strength verdict
+    if score >= 6:
+        strength = "Strong"
+    elif score >= 4:
+        strength = "Moderate"
+    else:
+        strength = "Weak"
+
+    return strength, feedback
+
+def check_breach(password):
+    """Check if password has been exposed using HaveIBeenPwned API"""
+    import hashlib
+    sha1_pass = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
+    first5, tail = sha1_pass[:5], sha1_pass[5:]
+    res = requests.get(f"https://api.pwnedpasswords.com/range/{first5}")
+    if res.status_code != 200:
+        return False, "Could not check password breach status."
+    hashes = (line.split(':') for line in res.text.splitlines())
+    for h, count in hashes:
+        if h == tail:
+            return True, f"Password found in {count} breaches! Avoid using it."
+    return False, "Password not found in known breaches."
+
+if __name__ == "__main__":
+    pwd = input("Enter your password to test: ")
+    strength, tips = check_password_strength(pwd)
+    print(f"\nPassword Strength: {strength}")
+    if tips:
+        print("Suggestions:")
+        for t in tips:
+            print(f" - {t}")
+
+    # Optional: Check breach status
+    choice = input("\nCheck if password has been exposed in breaches? (y/n): ").lower()
+    if choice == 'y':
+        breached, message = check_breach(pwd)
+        print(message)
+
+```
 
 ## HTML CODE 
 ```
